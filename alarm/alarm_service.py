@@ -4,19 +4,19 @@ import logging
 import logging.handlers
 import argparse
 import sys
-import RPi.GPIO as io # import the GPIO library we just installed but call it "io"
+import RPi.GPIO as io  # import the GPIO library we just installed but call it "io"
 import time  # this is only being used as part of the example
 
 # Defaults
 LOG_FILENAME = "/tmp/alarm.log"
 LOG_LEVEL = logging.INFO  # Could be e.g. "DEBUG" or "WARNING"
-LOG_ROTATION = 5 # Keep 5 days worth of logs
+LOG_ROTATION = 5  # Keep 5 days worth of logs
 
-## set GPIO mode to BCM
-## this takes GPIO number instead of pin number
+# set GPIO mode to BCM
+# this takes GPIO number instead of pin number
 io.setmode(io.BCM)
  
-## enter the number of whatever GPIO pin you're using
+# enter the number of whatever GPIO pin you're using
 door_pin = 23
 
 # Define and parse command line arguments
@@ -42,6 +42,7 @@ handler.setFormatter(formatter)
 # Attach the handler to the logger
 logger.addHandler(handler)
 
+
 # Make a class we can use to capture stdout and sterr in the log
 class MyLogger(object):
         def __init__(self, logger, level):
@@ -59,22 +60,22 @@ sys.stdout = MyLogger(logger, logging.INFO)
 # Replace stderr with logging to file at ERROR level
 sys.stderr = MyLogger(logger, logging.ERROR)
 
-## use the built-in pull-up resistor
+# use the built-in pull-up resistor
 io.setup(door_pin, io.IN, pull_up_down=io.PUD_UP)  # activate input with PullUp
  
-## initialize door 
+# initialize door
 door = 0
 
 # Loop forever, running the service:
 while True:
-	## if the switch is open
-    	if io.input(door_pin):
-        	logger.info("Door is open")
-        	door = 0 # set door to its initial value
-        	time.sleep(1) # wait 1 second before the next action
+    # if the switch is open
+    if io.input(door_pin):
+        logger.info("Door is open")
+        door = 0  # set door to its initial value
+        time.sleep(1)  # wait 1 second before the next action
     
-        ## if the switch is closed and door does not equal 1
-    	if (io.input(door_pin) == False and door != 1):
-        	logger.info("Door","Close")
-        	door = 1 # set door so that this loop won't act again until the switch has been opened
+    # if the switch is closed and door does not equal 1
+    if io.input(door_pin) is False and door != 1:
+        logger.info("Door", "Close")
+        door = 1  # set door so that this loop won't act again until the switch has been opened
 

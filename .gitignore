@@ -75,6 +75,9 @@ docs/_build/
 # PyBuilder
 target/
 
+# Pydev/IntellJ stuff:
+.idea/
+
 # IPython Notebook
 .ipynb_checkpoints
 
