@@ -75,7 +75,7 @@ while True:
         time.sleep(1)  # wait 1 second before the next action
     
     # if the switch is closed and door does not equal 1
-    if io.input(door_pin) is False and door != 1:
+    if io.input(door_pin) is False:
         logger.info("Door is closed")
         door = 1  # set door so that this loop won't act again until the switch has been opened
         time.sleep(1)  # wait 1 second before the next action
