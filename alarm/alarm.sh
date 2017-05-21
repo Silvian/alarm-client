@@ -11,7 +11,7 @@
 ### END INIT INFO
 
 # Change the next 3 lines to suit where you install your script and what you want to call it
-DIR=/usr/local/bin/alarm-client/alarm
+DIR=/usr/local/src/alarm-client/alarm
 DAEMON=$DIR/alarm_service.py
 DAEMON_NAME=alarm_service
 
